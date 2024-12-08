@@ -1,0 +1,34 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const projects = await getCollection('projects')
+---
+
+<Layout title="About" description={SITE.DESCRIPTION}>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+
+    <section>
+      <div class="min-w-full">
+        <h1 class="mb-4 text-3xl font-bold">Some more about Me</h1>
+        <p class="prose prose-neutral mb-8 dark:prose-invert">
+           Hi, I’m Mehul, a passionate Front-End Web Developer with a strong focus on creating responsive, user-centered designs. My journey started with open-source contributions, where I developed skills in React, Redux, and JavaScript. I’m driven by problem-solving and enjoy building dynamic, reusable UI components that enhance the development process.
+
+I’ve had the opportunity to work with clients on a variety of projects, improving web performance and user experience using modern frameworks like Next.js and TypeScript. My work is all about optimizing web apps and making them more efficient, scalable, and user-friendly.
+
+I’m always eager to learn, contribute to open-source, and push the boundaries of front-end development with creative and practical solutions.
+        </p>
+
+        <h2 class="mb-4 text-2xl font-semibold">My Projects</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </section>
+  </Container>
+</Layout>
